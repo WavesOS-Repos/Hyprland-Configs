@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -54,20 +52,7 @@ if [ -d ~/.zsh ]; then
     msg dn "Successfully backed up .zsh"
 fi
 
-# now install bash
-
-if [[ ! -d "$parent_dir/.cache/Zsh" ]]; then
-    git clone --depth=1 https://github.com/me-js-bro/Zsh.git "$parent_dir/.cache/Zsh" 2>&1 | tee -a "$log" && sleep 1 &> /dev/null
-fi
-
-if [[ -d "$parent_dir/.cache/Zsh" ]]; then
-    cd "$parent_dir/.cache/Zsh" || msg err "Could not cd into $parent_dir/.cache/Zsh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-    chmod +x install.sh 2>&1 | tee -a "$log"
-    ./install.sh 2>&1 | tee -a "$log"
-    exit 0
-else
-    msg err "Could not fine $pare nt_dir/.cache/Zsh. exiting.."
-    exit 1
-fi
+# now install zsh
+bash <(curl https://raw.githubusercontent.com/shell-ninja/Zsh/main/direct_install.sh)
 
 clear

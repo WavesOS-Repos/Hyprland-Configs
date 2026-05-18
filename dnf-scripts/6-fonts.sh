@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#WavesOS
+#### Advanced Hyprland Installation Script by ####
+#### Shell Ninja ( https://github.com/shell-ninja ) ####
 
 # color defination
 red="\e[1;31m"
@@ -89,6 +90,7 @@ for font in "${to_install[@]}"; do
     fi
 done
 
+# installing JetBrainsMono Nerd Font
 if [ ! -d ~/.local/share/fonts/JetBrainsMonoNerd ]; then
     DOWNLOAD_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
     # Maximum number of download attempts
@@ -105,6 +107,23 @@ else
     msg skp "Skipping installing JetBrainsMonoNerd, font was already there..."
 fi
 
+# installing Cascadia Code Nerd Font
+if [ ! -d ~/.local/share/fonts/CascadiaCode ]; then
+    DOWNLOAD_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.tar.xz"
+    # Maximum number of download attempts
+    MAX_ATTEMPTS=2
+    for ((ATTEMPT = 1; ATTEMPT <= MAX_ATTEMPTS; ATTEMPT++)); do
+        curl -OL "$DOWNLOAD_URL" && break
+        msg att "Download attempt $ATTEMPT failed. Retrying in 2 seconds..."
+        sleep 2
+    done
+    mkdir -p ~/.local/share/fonts/CascadiaCode
+    # Extract the new files into the CascadiaCode folder and log the output
+    tar -xJkf CascadiaCode.tar.xz -C ~/.local/share/fonts/CascadiaCode
+else 
+    msg skp "Skipping installing Cascadia Code, font was already there..."
+fi
+
 
 # Update font cache and log the output
 sudo fc-cache -fv &> /dev/null
@@ -112,6 +131,10 @@ sudo fc-cache -fv &> /dev/null
 # clean up 
 if [ -d "JetBrainsMono.tar.xz" ]; then
 	rm -rf JetBrainsMono.tar.xz
+fi
+
+if [ -d "CascadiaCode.tar.xz" ]; then
+	rm -rf CascadiaCode.tar.xz
 fi
 
 sleep 1 && clear

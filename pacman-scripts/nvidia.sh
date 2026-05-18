@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # I copied this script from JaKooLit. See here https://github.com/JaKooLit
 
 # color defination

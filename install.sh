@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -48,6 +46,19 @@ for pkg in "${packages[@]}"; do
     fi
 
 done
+
+
+# installing base devel for arch linux
+if command -v pacman &> /dev/null; then
+    if sudo pacman -Q base-devel &> /dev/null; then
+        printf "${magenta}[ Skip ] ${end} Skipping base-devel, it's already installed...\n"
+    else
+        printf "${green}=>${end} Installing base-devel...\n"
+        if sudo pacman -S --noconfirm base-devel &> /dev/null; then
+            printf "${cyan}::${end} Successfully installed ${cyan}base-devel${end}...\n"
+        fi
+    fi
+fi
 
 # only for fedora
 if command -v dnf &> /dev/null; then

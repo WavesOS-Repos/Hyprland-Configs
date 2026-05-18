@@ -1,6 +1,9 @@
 #!/bin/bash
 
-#WavesOS
+# I copied this script from JaKooLit. See here https://github.com/JaKooLit
+
+#### Advanced Hyprland Installation Script by ####
+#### Shell Ninja ( https://github.com/shell-ninja ) ####
 
 # color defination
 red="\e[1;31m"

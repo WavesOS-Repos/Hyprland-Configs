@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -68,7 +66,7 @@ _hypr=(
     hyprlock
     hypridle
     hyprcursor
-    hyprpolkitagent
+    # hyprpolkitagent
 )
 
 # checking already installed packages 

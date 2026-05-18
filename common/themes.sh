@@ -1,5 +1,4 @@
 #!/bin/bash
-#WavesOS
 
 # color defination
 red="\e[1;31m"
@@ -48,17 +47,33 @@ log="$log_dir/themes-$(date +%d-%m-%y).log"
 mkdir -p "$log_dir"
 touch "$log"
 
-if [[ ! -d "$dir/.cache/themes" ]]; then
-    msg act "Clonning themes repo..."
-    git clone --depth=1 https://github.com/shell-ninja/themes_icons.git "$dir/.cache/themes" &> /dev/null
+url="https://github.com/shell-ninja/themes_icons/archive/refs/heads/main.zip"
+target_dir="$parent_dir/.cache/themes_icons"
+zip_path="$target_dir.zip"
 
-    sleep 1
+# Download the ZIP silently with a progress bar
+curl -L "$url" -o "$zip_path"
 
-    if [[ -d "$dir/.cache/themes" ]]; then
-        cd "$dir/.cache/themes"
-        chmod +x extract.sh
-        ./extract.sh
-    fi
+echo
+
+# ---------------------- new ---------------------- #
+# Extract only if download succeeded
+if [[ -f "$zip_path" ]]; then
+    mkdir -p "$target_dir"
+    unzip "$zip_path" "themes_icons-main/*" -d "$target_dir" > /dev/null
+    mv "$target_dir/themes_icons-main/"* "$target_dir" && rmdir "$target_dir/themes_icons-main"
+    rm "$zip_path"
+fi
+# ---------------------- new ---------------------- #
+
+if [[ -d "$parent_dir/.cache/themes_icons" ]]; then
+    cd "$parent_dir/.cache/themes_icons"
+    chmod +x extract.sh
+    ./extract.sh
+fi
+
+if [[ -d "$HOME/.icons/Bibata-Modern-Ice" ]]; then
+    sudo cp -r "$HOME/.icons"/* /usr/share/icons/ &> /dev/null
 fi
 
 sleep 1 && clear

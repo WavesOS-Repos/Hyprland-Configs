@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -50,11 +48,30 @@ touch "$log"
 theme="$parent_dir/.cache/SilentSDDM"
 theme_dir=/usr/share/sddm/themes
 
+url="https://github.com/WavesOS-Repos/WavesSDDM/archive/refs/heads/main.zip"
+target_dir="$parent_dir/.cache/SilentSDDM"
+zip_path="$target_dir.zip"
+
+# Download the ZIP silently with a progress bar
+msg act "Clonning sddm theme..."
+curl -L "$url" -o "$zip_path"
+
+echo
+
+# ---------------------- new ---------------------- #
+# Extract only if download succeeded
+if [[ -f "$zip_path" ]]; then
+    mkdir -p "$target_dir"
+    unzip "$zip_path" "SilentSDDM-main/*" -d "$target_dir" > /dev/null
+    mv "$target_dir/SilentSDDM-main/"* "$target_dir" && rmdir "$target_dir/SilentSDDM-main" > /dev/null
+    rm "$zip_path" > /dev/null
+fi
+# ---------------------- new ---------------------- #
+
 # creating sddm theme dir
 [ ! -d "$theme_dir" ] && sudo mkdir -p "$theme_dir"
 
-msg act "Clonning sddm theme..."
-git clone --depth=1 https://github.com/shell-ninja/SilentSDDM.git "$parent_dir/.cache/SilentSDDM" &> /dev/null
+# git clone --depth=1 https://github.com/shell-ninja/SilentSDDM.git "$parent_dir/.cache/SilentSDDM" &> /dev/null
 
 # Set up SDDM
 msg act "Setting up the Login Screen..."

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -52,4 +50,7 @@ if [ -d ~/.bash ]; then
     msg dn ".bash directory was backed up successfully!" 
 fi
 
-bash <(curl https://raw.githubusercontent.com/me-js-bro/Bash/main/direct_install.sh) 2>&1 | tee -a "$log"
+# now install bash
+bash <(curl https://raw.githubusercontent.com/shell-ninja/Bash/main/direct_install.sh) 2>&1 | tee -a "$log"
+
+clear

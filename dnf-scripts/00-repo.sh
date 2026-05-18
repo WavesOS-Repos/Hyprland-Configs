@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#WavesOS
+#### Advanced Hyprland Installation Script by ####
+#### Shell Ninja ( https://github.com/shell-ninja ) ####
+
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -66,6 +68,7 @@ copr_repos=(
     lihaohong/yazi
     erikreider/SwayNotificationCenter  
     alternateved/eza
+    jkinred/satty
 )
 
 # enabling 3rd party repo

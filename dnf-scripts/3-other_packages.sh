@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#WavesOS
+#### Advanced Hyprland Installation Script by ####
+#### Shell Ninja ( https://github.com/shell-ninja ) ####
+
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -62,98 +64,98 @@ else
 fi
 
 main_packages=(
-  curl
-  eog
-  fastfetch
-  ffmpeg-free
-  git
-  grim
-  ImageMagick
-  jq
-  kitty
-  kvantum
-  kvantum-qt5
-  less
-  libX11-devel
-  libXext-devel
-  lxappearance
-  make
-  network-manager-applet
-  NetworkManager-tui
-  neovim
-  nvtop
-  pamixer
-  parallel
-  pciutils
-  pavucontrol
-  pipewire-alsa
-  pipewire-utils
-  power-profiles-daemon
-  pulseaudio-utils
-  python3-requests
-  python3-devel
-  python3-gobject
-  python3-pip
-  python3-pillow
-  python3-pyquery
-  qt5ct
-  qt6ct
-  qt6-qtsvg
-  ripgrep
-  rofi-wayland
-  slurp
-  SwayNotificationCenter
-  swappy
-  tar
-  unzip
-  waybar
-  wget2
-  wl-clipboard
-  xdg-utils
-  yazi
+    curl
+    fastfetch
+    ffmpeg-free
+    git
+    grim
+    ImageMagick
+    jq
+    kitty
+    kvantum
+    kvantum-qt5
+    less
+    libX11-devel
+    libXext-devel
+    lxappearance
+    make
+    network-manager-applet
+    NetworkManager-tui
+    nodejs
+    nodejs-npm
+    neovim
+    nvtop
+    pamixer
+    parallel
+    pciutils
+    pavucontrol
+    pipewire-alsa
+    pipewire-utils
+    pipewire-pulse
+    power-profiles-daemon
+    pulseaudio-utils
+    python3-requests
+    python3-devel
+    python3-gobject
+    python3-pip
+    python3-pillow
+    python3-pyquery
+    qt5ct
+    qt6ct-kde
+    qt6-qtsvg
+    ripgrep
+    rofi-wayland
+    slurp
+    SwayNotificationCenter
+    satty
+    tar
+    unzip
+    waybar
+    wget2
+    wl-clipboard
+    xdg-utils
+    xfce-polkit
+    yazi
 )
 
 # other necessary packages
 other_packages=(
-  btop
-  cava
-  cliphist
-  gnome-disk-utility 
-  mpv
-  mpv-mpris
-  nwg-look
-  pamixer
-  swww
+    btop
+    cava
+    cliphist
+    kde-partitionmanager
+    mpv
+    mpv-mpris
+    nwg-look
+    pamixer
+    awww
+    wlogout
 )
 
-# thunar file manager
-thunar=(
-  ffmpegthumbnailer
-  file-roller
-  gvfs
-  gvfs-mtp 
-  Thunar 
-  thunar-volman 
-  tumbler 
-  thunar-archive-plugin
+dolphin=(
+    ark
+    crudini
+    dolphin
+    gwenview
+    okular
 )
 
 # url to install grimblast
 grimblast_url=https://github.com/hyprwm/contrib.git
 
 # checking already installed packages 
-for skipable in "${main_packages[@]}" "${other_packages[@]}" "${thunar[@]}"; do
+for skipable in "${main_packages[@]}" "${other_packages[@]}" "${dolphin[@]}"; do
     skip_installed "$skipable"
 done
 
 installble_main_pkg=($(printf "%s\n" "${main_packages[@]}" | grep -vxFf "$installed_cache"))
 installble_other_pkg=($(printf "%s\n" "${other_packages[@]}" | grep -vxFf "$installed_cache"))
-installble_thunar_pkg=($(printf "%s\n" "${thunar[@]}" | grep -vxFf "$installed_cache"))
+installble_dolphin_pkg=($(printf "%s\n" "${dolphin[@]}" | grep -vxFf "$installed_cache"))
 
 printf "\n\n"
 
 # installing necessary packages
-for packages in "${installble_main_pkg[@]}" "${installble_other_pkg[@]}" "${installble_thunar_pkg[@]}"; do
+for packages in "${installble_main_pkg[@]}" "${installble_other_pkg[@]}" "${installble_dolphin_pkg[@]}"; do
   install_package "$packages"
   if rpm -q "$packages" &> /dev/null; then
     echo "[ DONE ] - $packages was installed successfully!" 2>&1 | tee -a "$log" &> /dev/null

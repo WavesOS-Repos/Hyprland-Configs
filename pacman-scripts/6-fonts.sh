@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#WavesOS
-
 # color defination
 red="\e[1;31m"
 green="\e[1;32m"
@@ -64,7 +62,7 @@ fi
 # necessary fonts [ new installable fonts should be added here ]
 fonts=(
     ttf-font-awesome
-    ttf-cascadia-code
+    ttf-cascadia-code-nerd
     ttf-jetbrains-mono-nerd
     ttf-meslo-nerd
     noto-fonts

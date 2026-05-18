@@ -32,14 +32,7 @@ fn_welcome() {
         --width 90 \
         --margin "1 2" \
         --padding "1 2" \
-    'Welcome to the' 'Hyprland installation script by,' '
-   
- __      __                             ________    _________
-/  \    /  \_____ ___  __ ____   ______ \_____  \  /   _____/
-\   \/\/   /\__  \\  \/ // __ \ /  ___/  /   |   \ \_____  \ 
- \        /  / __ \\   /\  ___/ \___ \  /    |    \/        \
-  \__/\  /  (____  /\_/  \___  >____  > \_______  /_______  /
-       \/        \/          \/     \/          \/        \/ '
+    'Welcome to the' 'Hyprland installation script'
 }
 
 fn_ask() {
